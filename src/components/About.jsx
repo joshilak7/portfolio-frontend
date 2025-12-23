@@ -59,6 +59,7 @@ const About = () => {
       <div className="container">
         <h2>About Me</h2>
         <div
+          className="about-content"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -68,6 +69,7 @@ const About = () => {
         >
           <div
             ref={aboutTextRef}
+            className="about-text"
             style={{
               opacity: "0",
               transform: "translateY(20px)",
@@ -101,6 +103,7 @@ const About = () => {
               Skills & Technologies
             </h3>
             <div
+              className="skills-container"
               style={{
                 display: "flex",
                 flexWrap: "wrap",
@@ -131,6 +134,7 @@ const About = () => {
 
           <div
             ref={aboutImgRef}
+            className="about-img"
             style={{
               opacity: "0",
               transform: "translateY(20px)",
@@ -142,6 +146,7 @@ const About = () => {
             }}
           >
             <div
+              className="profile-image"
               style={{
                 width: "100%",
                 height: "400px",
@@ -173,6 +178,7 @@ const About = () => {
       </div>
 
       <style jsx="true">{`
+        /* Desktop styles */
         .skill-tag:hover {
           transform: translateY(-5px);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -196,17 +202,191 @@ const About = () => {
           opacity: 0.2;
         }
 
-        .about-img:hover div {
+        .about-img:hover .profile-image {
           transform: scale(1.05);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+          .about-content {
+            gap: 40px !important;
+          }
+
+          .profile-image {
+            height: 350px !important;
+          }
         }
 
         @media (max-width: 992px) {
           .about-content {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+
+          .about-text {
+            order: 2;
           }
 
           .about-img {
-            order: -1;
+            order: 1;
+            max-width: 500px;
+            margin: 0 auto;
+          }
+
+          .profile-image {
+            height: 350px !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .about-content {
+            gap: 30px !important;
+          }
+
+          h2 {
+            font-size: 2rem !important;
+          }
+
+          .about-text p {
+            font-size: 1rem !important;
+            line-height: 1.6;
+            margin-bottom: 15px;
+          }
+
+          .profile-image {
+            height: 300px !important;
+          }
+
+          .profile-image div {
+            font-size: 1.3rem !important;
+          }
+
+          .profile-image .fa-user {
+            font-size: 3.5rem !important;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .about-content {
+            gap: 25px !important;
+          }
+
+          h2 {
+            font-size: 1.8rem !important;
+            text-align: center;
+            margin-bottom: 20px;
+          }
+
+          .about-text p {
+            font-size: 0.95rem !important;
+            text-align: justify;
+          }
+
+          h3 {
+            font-size: 1.4rem !important;
+            text-align: center;
+          }
+
+          .skills-container {
+            justify-content: center;
+            gap: 8px !important;
+          }
+
+          .skill-tag {
+            padding: 6px 12px !important;
+            font-size: 0.85rem !important;
+          }
+
+          .profile-image {
+            height: 250px !important;
+          }
+
+          .profile-image div {
+            font-size: 1.2rem !important;
+          }
+
+          .profile-image .fa-user {
+            font-size: 3rem !important;
+            margin-bottom: 15px !important;
+          }
+
+          .profile-image div div {
+            font-size: 0.9rem !important;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .about-text p {
+            font-size: 0.9rem !important;
+          }
+
+          .skill-tag {
+            padding: 5px 10px !important;
+            font-size: 0.8rem !important;
+          }
+
+          .profile-image {
+            height: 220px !important;
+          }
+
+          .profile-image div {
+            font-size: 1.1rem !important;
+          }
+
+          .profile-image .fa-user {
+            font-size: 2.5rem !important;
+          }
+        }
+
+        /* For very small screens */
+        @media (max-width: 320px) {
+          .skills-container {
+            gap: 5px !important;
+          }
+
+          .skill-tag {
+            padding: 4px 8px !important;
+            font-size: 0.75rem !important;
+          }
+
+          .profile-image {
+            height: 200px !important;
+          }
+        }
+
+        /* For landscape mode on mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+          .about-content {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 20px !important;
+          }
+
+          .profile-image {
+            height: 250px !important;
+          }
+        }
+
+        /* For tablet portrait */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+          .about-content {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+
+          .profile-image {
+            height: 350px !important;
+          }
+        }
+
+        /* For tablet landscape */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+          .about-content {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 30px !important;
+          }
+
+          .profile-image {
+            height: 300px !important;
           }
         }
       `}</style>

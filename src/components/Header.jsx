@@ -89,6 +89,7 @@ const Header = () => {
           position: relative;
           overflow: hidden;
           transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          cursor: pointer;
         }
 
         .logo::after {
@@ -130,6 +131,7 @@ const Header = () => {
           padding: 5px 0;
           transition: color 0.3s ease;
           cursor: pointer;
+          font-size: 1rem;
         }
 
         .nav-links a::after {
@@ -159,6 +161,9 @@ const Header = () => {
           cursor: pointer;
           font-size: 1.5rem;
           transition: transform 0.4s ease, color 0.4s ease;
+          color: var(--light);
+          padding: 8px;
+          z-index: 1001;
         }
 
         .hamburger:hover {
@@ -166,22 +171,52 @@ const Header = () => {
           transform: rotate(90deg);
         }
 
-        /* RESPONSIVE */
+        /* MOBILE RESPONSIVE STYLES */
         @media (max-width: 768px) {
+          /* Header adjustments */
+          .header {
+            padding: 0;
+          }
+
+          .header.scrolled {
+            padding: 0;
+          }
+
+          /* Container adjustments */
+          .container {
+            padding: 0 20px;
+            width: 100%;
+          }
+
+          /* Nav container */
+          .nav-container {
+            padding: 15px 0;
+            min-height: 70px;
+          }
+
+          /* Logo adjustments */
+          .logo {
+            font-size: 1.5rem;
+            z-index: 1001;
+          }
+
+          /* Mobile menu styles */
           .nav-links {
             position: fixed;
-            top: 80px;
+            top: 0;
             right: -100%;
-            width: 80%;
-            height: calc(100vh - 80px);
-            background: rgba(30, 41, 59, 0.95);
-            backdrop-filter: blur(10px);
+            width: 100%;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(15px);
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding-top: 50px;
+            justify-content: center;
+            padding: 80px 20px 40px;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-            transition: right 0.5s ease-in-out;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            margin: 0;
           }
 
           .nav-links.active {
@@ -189,12 +224,154 @@ const Header = () => {
           }
 
           .nav-links li {
-            margin: 15px 0;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+          }
+
+          .nav-links li:nth-child(1) {
+            animation-delay: 0.1s;
+          }
+          .nav-links li:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+          .nav-links li:nth-child(3) {
+            animation-delay: 0.3s;
+          }
+          .nav-links li:nth-child(4) {
+            animation-delay: 0.4s;
+          }
+
+          @keyframes fadeInUp {
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .nav-links a {
+            display: block;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+          }
+
+          .nav-links a:hover,
+          .nav-links a.active {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            transform: translateX(-5px);
+          }
+
+          .nav-links a::after {
+            display: none;
+          }
+
+          /* Hamburger adjustments */
+          .hamburger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          .hamburger i {
+            font-size: 1.3rem;
+          }
+
+          /* Prevent body scroll when menu is open */
+          body.menu-open {
+            overflow: hidden;
+          }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+          .container {
+            padding: 0 15px;
+          }
+
+          .nav-container {
+            padding: 12px 0;
+            min-height: 60px;
+          }
+
+          .logo {
+            font-size: 1.3rem;
           }
 
           .hamburger {
-            display: block;
+            width: 40px;
+            height: 40px;
           }
+
+          .hamburger i {
+            font-size: 1.2rem;
+          }
+
+          .nav-links a {
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            max-width: 280px;
+          }
+
+          .nav-links li {
+            margin-bottom: 20px;
+          }
+        }
+
+        /* Large phones and small tablets */
+        @media (min-width: 481px) and (max-width: 768px) {
+          .nav-links a {
+            font-size: 1.25rem;
+            padding: 16px 24px;
+            max-width: 320px;
+          }
+
+          .nav-links li {
+            margin-bottom: 30px;
+          }
+
+          .logo {
+            font-size: 1.6rem;
+          }
+        }
+
+        /* Tablet landscape */
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .nav-links li {
+            margin-left: 1.5rem;
+          }
+
+          .nav-links a {
+            font-size: 0.95rem;
+          }
+        }
+
+        /* Fix for iOS Safari */
+        @supports (-webkit-touch-callout: none) {
+          .nav-links {
+            height: -webkit-fill-available;
+          }
+        }
+
+        /* Smooth transitions */
+        * {
+          -webkit-tap-highlight-color: transparent;
         }
       `}</style>
     </header>
