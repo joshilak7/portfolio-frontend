@@ -31,7 +31,7 @@ const Footer = () => {
     },
     {
       icon: "fab fa-linkedin-in",
-      url: "https://linkedin.com/in/joshilak7",
+      url: "https://www.linkedin.com/in/lakki-joshi-5a5958388",
       title: "LinkedIn",
       color: "#0077b5",
     },
