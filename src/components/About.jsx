@@ -53,6 +53,10 @@ const About = () => {
       <Helmet>
         <title>About Lakki Joshi | MERN Stack Developer</title>
         <meta
+          name="google-site-verification"
+          content="4kWfLWrBSbLrHZIEiVofjq-CcEvTNMLC1pprWIKbU3g"
+        />
+        <meta
           name="description"
           content="Learn more about Lakki Joshi, a MERN Stack Full Stack Developer."
         />
