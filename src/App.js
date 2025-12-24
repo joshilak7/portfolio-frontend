@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [loading, setLoading] = useState(true);
