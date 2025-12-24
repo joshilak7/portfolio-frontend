@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
-import { Analytics } from "@vercel/analytics/react";
 
 const About = () => {
   const aboutTextRef = useRef(null);

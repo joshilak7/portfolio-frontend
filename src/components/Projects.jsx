@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Analytics } from "@vercel/analytics/react";
 
 const Projects = () => {
   const [projects, setProjects] = useState([

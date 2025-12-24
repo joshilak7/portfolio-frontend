@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import { Analytics } from "@vercel/analytics/react";
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
