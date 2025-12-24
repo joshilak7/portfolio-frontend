@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser"; // ✅ EmailJS import
 import { Helmet } from "react-helmet-async";
-import { Analytics } from "@vercel/analytics/react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

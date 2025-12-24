@@ -13,6 +13,7 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <App />
+      <Analytics />
       <SpeedInsights />
     </HelmetProvider>
   </React.StrictMode>
