@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts --max-old-space-size=4096 start",
-    "build": "GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false react-scripts build",
+    "build": "cross-env GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false react-scripts build",
     "build:analyze": "source-map-explorer 'build/static/js/*.js'",
     "build:prod": "npm run build && npm run analyze-bundle",
     "analyze-bundle": "source-map-explorer 'build/static/js/*.js' --html bundle-report.html",
@@ -52,6 +52,6 @@
     "source-map-explorer": "^2.5.3"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   }
 }
