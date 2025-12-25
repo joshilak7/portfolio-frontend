@@ -1,67 +1,275 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { Helmet } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react";
 
-const Projects = () => {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      title: "Task Management App",
-      description:
-        "A productivity application for organizing tasks, setting deadlines, and tracking progress with real-time updates and team collaboration features.",
-      technologies: ["Vue.js", "Firebase", "SCSS", "PWA", "Chart.js"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/joshilak7",
-      imageColor: "linear-gradient(45deg, var(--secondary), var(--accent))",
-    },
-    {
-      id: 2,
-      title: "Weather Dashboard",
-      description:
-        "A responsive web application that displays current weather and 7-day forecasts for multiple locations with interactive charts and maps.",
-      technologies: [
-        "JavaScript",
-        "OpenWeather API",
-        "Chart.js",
-        "Leaflet.js",
-        "Local Storage",
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com/joshilak7",
-      imageColor: "linear-gradient(45deg, var(--accent), var(--primary))",
-    },
-  ]);
-
-  const [visibleProjects, setVisibleProjects] = useState(3);
-  const [loading, setLoading] = useState(false);
-
-  const loadMore = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setVisibleProjects((prev) => Math.min(prev + 3, projects.length));
-      setLoading(false);
-    }, 500);
-  };
+// Memoized ProjectCard component to prevent unnecessary re-renders
+const ProjectCard = memo(({ project, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = React.useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "50px" }
     );
 
-    document.querySelectorAll(".project-card").forEach((card) => {
-      observer.observe(card);
-    });
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
 
     return () => observer.disconnect();
-  }, [visibleProjects]);
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className="project-card"
+      style={{
+        background: "rgba(30, 41, 59, 0.7)",
+        borderRadius: "15px",
+        overflow: "hidden",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+        transition: "var(--transition)",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        willChange: "transform, opacity", // Hint browser for optimization
+      }}
+      data-project-id={project.id}
+    >
+      <div
+        style={{
+          height: "200px",
+          overflow: "hidden",
+          position: "relative",
+          contain: "paint", // CSS containment for performance
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            background: project.imageColor,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            transition: "var(--transition)",
+            padding: "15px",
+            textAlign: "center",
+            willChange: "transform",
+          }}
+          className="project-image-placeholder"
+        >
+          {project.title}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: "15px",
+            right: "15px",
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            fontSize: "0.8rem",
+          }}
+        >
+          Project #{project.id}
+        </div>
+      </div>
+
+      <div style={{ padding: "25px" }}>
+        <h3
+          style={{
+            fontSize: "1.3rem",
+            marginBottom: "10px",
+            color: "var(--light)",
+          }}
+        >
+          {project.title}
+        </h3>
+
+        <p
+          style={{
+            fontSize: "0.95rem",
+            marginBottom: "15px",
+            color: "var(--gray)",
+            minHeight: "60px",
+          }}
+          className="project-description"
+        >
+          {project.description}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "8px",
+            marginBottom: "20px",
+          }}
+          className="technologies-container"
+        >
+          {project.technologies.map((tech, index) => (
+            <span
+              key={index}
+              style={{
+                background: "rgba(37, 99, 235, 0.2)",
+                color: "var(--primary)",
+                padding: "5px 12px",
+                borderRadius: "20px",
+                fontSize: "0.8rem",
+                fontWeight: "500",
+              }}
+              className="tech-tag"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "20px",
+            marginTop: "20px",
+          }}
+          className="project-buttons"
+        >
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            style={{
+              flex: "1",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "10px 15px",
+              fontSize: "0.9rem",
+            }}
+          >
+            <i className="fas fa-external-link-alt"></i>
+            Live Demo
+          </a>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline"
+            style={{
+              flex: "1",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "10px 15px",
+              fontSize: "0.9rem",
+            }}
+          >
+            <i className="fab fa-github"></i>
+            View Code
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+// Preload function for Font Awesome icons
+const preloadFontAwesome = () => {
+  if (typeof window !== "undefined") {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+    link.as = "style";
+    link.crossOrigin = "anonymous";
+    document.head.appendChild(link);
+  }
+};
+
+const Projects = () => {
+  // Memoize projects data to prevent unnecessary re-renders
+  const projects = useMemo(
+    () => [
+      {
+        id: 1,
+        title: "Task Management App",
+        description:
+          "A productivity application for organizing tasks, setting deadlines, and tracking progress with real-time updates and team collaboration features.",
+        technologies: ["Vue.js", "Firebase", "SCSS", "PWA", "Chart.js"],
+        liveUrl: "#",
+        githubUrl: "https://github.com/joshilak7",
+        imageColor: "linear-gradient(45deg, var(--secondary), var(--accent))",
+      },
+      {
+        id: 2,
+        title: "Weather Dashboard",
+        description:
+          "A responsive web application that displays current weather and 7-day forecasts for multiple locations with interactive charts and maps.",
+        technologies: [
+          "JavaScript",
+          "OpenWeather API",
+          "Chart.js",
+          "Leaflet.js",
+          "Local Storage",
+        ],
+        liveUrl: "#",
+        githubUrl: "https://github.com/joshilak7",
+        imageColor: "linear-gradient(45deg, var(--accent), var(--primary))",
+      },
+      // Add more projects here if needed
+    ],
+    []
+  );
+
+  const [visibleProjects, setVisibleProjects] = useState(2); // Start with 2 instead of 3
+  const [loading, setLoading] = useState(false);
+
+  // Memoize loadMore function to prevent unnecessary re-renders
+  const loadMore = useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setVisibleProjects((prev) => Math.min(prev + 2, projects.length));
+      setLoading(false);
+    }, 300); // Reduced from 500ms
+  }, [projects.length]);
+
+  // Preload resources on component mount
+  useEffect(() => {
+    preloadFontAwesome();
+
+    // Preconnect to critical domains
+    const preconnectLinks = [
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com",
+      "https://cdnjs.cloudflare.com",
+    ];
+
+    preconnectLinks.forEach((url) => {
+      const link = document.createElement("link");
+      link.rel = "preconnect";
+      link.href = url;
+      link.crossOrigin = "anonymous";
+      document.head.appendChild(link);
+    });
+  }, []);
+
+  // Calculate visible projects to render
+  const projectsToRender = useMemo(
+    () => projects.slice(0, visibleProjects),
+    [projects, visibleProjects]
+  );
 
   return (
     <>
@@ -72,13 +280,24 @@ const Projects = () => {
           content="Real-world MERN stack projects including full-stack and Web3 applications."
         />
         <link rel="canonical" href="https://lakkijoshi.vercel.app/projects" />
+        {/* Preload critical resources */}
+        <link
+          rel="preload"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Helmet>
+      <Analytics />
+
       <section
         className="projects"
         id="projects"
         style={{
           background: "rgba(30, 41, 59, 0.5)",
           backdropFilter: "blur(5px)",
+          contentVisibility: "auto", // Performance optimization
         }}
       >
         <div className="container">
@@ -100,161 +319,12 @@ const Projects = () => {
               gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
               gap: "30px",
               marginBottom: "50px",
+              contain: "layout style", // CSS containment for performance
             }}
             className="projects-grid"
           >
-            {projects.slice(0, visibleProjects).map((project) => (
-              <div
-                key={project.id}
-                className="project-card"
-                style={{
-                  background: "rgba(30, 41, 59, 0.7)",
-                  borderRadius: "15px",
-                  overflow: "hidden",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
-                  transition: "var(--transition)",
-                  opacity: "0",
-                  transform: "translateY(20px)",
-                }}
-              >
-                <div
-                  style={{
-                    height: "200px",
-                    overflow: "hidden",
-                    position: "relative",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      background: project.imageColor,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "white",
-                      fontSize: "1.5rem",
-                      fontWeight: "bold",
-                      transition: "var(--transition)",
-                      padding: "15px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {project.title}
-                  </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "15px",
-                      right: "15px",
-                      background: "rgba(0, 0, 0, 0.7)",
-                      color: "white",
-                      padding: "5px 10px",
-                      borderRadius: "5px",
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    Project #{project.id}
-                  </div>
-                </div>
-
-                <div style={{ padding: "25px" }}>
-                  <h3
-                    style={{
-                      fontSize: "1.3rem",
-                      marginBottom: "10px",
-                      color: "var(--light)",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontSize: "0.95rem",
-                      marginBottom: "15px",
-                      color: "var(--gray)",
-                      minHeight: "60px",
-                    }}
-                    className="project-description"
-                  >
-                    {project.description}
-                  </p>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "8px",
-                      marginBottom: "20px",
-                    }}
-                    className="technologies-container"
-                  >
-                    {project.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        style={{
-                          background: "rgba(37, 99, 235, 0.2)",
-                          color: "var(--primary)",
-                          padding: "5px 12px",
-                          borderRadius: "20px",
-                          fontSize: "0.8rem",
-                          fontWeight: "500",
-                        }}
-                        className="tech-tag"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "20px",
-                      marginTop: "20px",
-                    }}
-                    className="project-buttons"
-                  >
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn"
-                      style={{
-                        flex: "1",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "8px",
-                        padding: "10px 15px",
-                        fontSize: "0.9rem",
-                      }}
-                    >
-                      <i className="fas fa-external-link-alt"></i>
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline"
-                      style={{
-                        flex: "1",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "8px",
-                        padding: "10px 15px",
-                        fontSize: "0.9rem",
-                      }}
-                    >
-                      <i className="fab fa-github"></i>
-                      View Code
-                    </a>
-                  </div>
-                </div>
-              </div>
+            {projectsToRender.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
 
@@ -267,7 +337,9 @@ const Projects = () => {
                 style={{
                   padding: "15px 40px",
                   fontSize: "1rem",
+                  willChange: "transform", // Hint for animation optimization
                 }}
+                aria-label="Load more projects"
               >
                 {loading ? (
                   <>
@@ -284,13 +356,24 @@ const Projects = () => {
         </div>
 
         <style jsx="true">{`
+          /* Critical styles first */
+          .project-card {
+            backface-visibility: hidden;
+            transform: translateZ(0); /* GPU acceleration */
+          }
+
           .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) translateZ(0);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
           }
 
           .project-card:hover > div:first-child > div:first-child {
             transform: scale(1.1);
+          }
+
+          /* Optimize button for better INP */
+          .btn {
+            touch-action: manipulation; /* Remove 300ms delay on mobile */
           }
 
           /* Mobile Responsive Styles */
@@ -444,23 +527,11 @@ const Projects = () => {
               gap: 25px !important;
             }
           }
-
-          /* Ensure images and content don't overflow on mobile */
-          @media (max-width: 768px) {
-            .project-card img {
-              max-width: 100%;
-              height: auto;
-            }
-
-            * {
-              max-width: 100%;
-              box-sizing: border-box;
-            }
-          }
         `}</style>
       </section>
     </>
   );
 };
 
-export default Projects;
+// Export as memoized component
+export default memo(Projects);

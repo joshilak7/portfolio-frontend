@@ -1,6 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      /* Extract most critical styles from App.css */
+      :root {
+        --primary: #3a86ff;
+        --secondary: #8338ec;
+        --dark: #0a0e17;
+        --light: #f8f9fa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--dark);
+        color: var(--light);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* Loading screen - show immediately */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--dark);
+        z-index: 9999;
+      }
+
+      /* Animated background minimal */
+      .animated-bg {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+    </style>
     <meta
       name="google-site-verification"
       content="4kWfLWrBSbLrHZIEiVofjq-CcEvTNMLC1pprWIKbU3g"
