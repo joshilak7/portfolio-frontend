@@ -48,11 +48,9 @@
     ]
   },
   "devDependencies": {
-    "source-map-explorer": "^2.5.3",
-    "webpack-bundle-analyzer": "^4.10.2",
-    "craco": "^7.1.0",
-    "@craco/craco": "^7.1.0",
-    "compression-webpack-plugin": "^11.1.0",
-    "terser-webpack-plugin": "^5.3.10"
+    "source-map-explorer": "^2.5.3"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
