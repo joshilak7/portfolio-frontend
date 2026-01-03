@@ -214,6 +214,16 @@ const Projects = () => {
       },
       {
         id: 2,
+        title: "Authentication System",
+        description:
+          "A secure authentication system with user registration, login, JWT-based authorization, protected routes, password encryption, and role-based access control.",
+        technologies: ["Vue.js", "Firebase Auth", "SCSS", "JWT", "PWA"],
+        liveUrl: "https://frontend-blond-pi-19.vercel.app/login",
+        githubUrl: "https://github.com/joshilak7",
+        imageColor: "linear-gradient(45deg, var(--secondary), var(--accent))",
+      },
+      {
+        id: 3,
         title: "Weather Dashboard",
         description:
           "A responsive web application that displays current weather and 7-day forecasts for multiple locations with interactive charts and maps.",
