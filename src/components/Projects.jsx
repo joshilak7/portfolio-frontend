@@ -204,21 +204,21 @@ const Projects = () => {
     () => [
       {
         id: 1,
-        title: "Task Management App",
-        description:
-          "A productivity application for organizing tasks, setting deadlines, and tracking progress with real-time updates and team collaboration features.",
-        technologies: ["Vue.js", "Firebase", "SCSS", "PWA", "Chart.js"],
-        liveUrl: "#",
-        githubUrl: "https://github.com/joshilak7",
-        imageColor: "linear-gradient(45deg, var(--secondary), var(--accent))",
-      },
-      {
-        id: 2,
         title: "Authentication System",
         description:
           "A secure authentication system with user registration, login, JWT-based authorization, protected routes, password encryption, and role-based access control.",
         technologies: ["Vue.js", "Firebase Auth", "SCSS", "JWT", "PWA"],
         liveUrl: "https://frontend-blond-pi-19.vercel.app/login",
+        githubUrl: "https://github.com/joshilak7",
+        imageColor: "linear-gradient(45deg, var(--secondary), var(--accent))",
+      },
+      {
+        id: 2,
+        title: "Task Management App",
+        description:
+          "A productivity application for organizing tasks, setting deadlines, and tracking progress with real-time updates and team collaboration features.",
+        technologies: ["Vue.js", "Firebase", "SCSS", "PWA", "Chart.js"],
+        liveUrl: "#",
         githubUrl: "https://github.com/joshilak7",
         imageColor: "linear-gradient(45deg, var(--secondary), var(--accent))",
       },
