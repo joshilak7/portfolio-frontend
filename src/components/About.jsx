@@ -66,7 +66,8 @@ const About = () => {
         className="about"
         id="about"
         style={{
-          background: "rgba(30, 41, 59, 0.7)",
+          background:
+            "linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9))",
           backdropFilter: "blur(5px)",
         }}
       >
@@ -91,28 +92,40 @@ const About = () => {
               }}
             >
               <p>
-                Hello! I'm{" "}
-                <strong style={{ color: "var(--primary)" }}>Lakki Joshi</strong>
-                , a passionate full-stack developer with over 1 year of
-                experience creating digital solutions for businesses and
-                individuals.
+                Hi, I'm{" "}
+                <strong
+                  style={{
+                    background: "linear-gradient(135deg, #00bcd4, #ff5722)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Lakki Joshi
+                </strong>
+                . I'm a full-stack web developer with around 1 year of hands-on
+                experience. I enjoy building simple and useful web applications
+                for real users.
               </p>
+
               <p>
-                I specialize in turning complex problems into simple, beautiful
-                designs. My journey in web development started during my
-                computer application degree, and I've been hooked ever since.
+                I mostly work with HTML, CSS, JavaScript, and backend
+                technologies like Node.js and MongoDB. I like solving problems
+                step by step and keeping my code clean and easy to understand.
               </p>
+
               <p>
-                I love learning new technologies and staying up-to-date with
-                industry trends. When I'm not coding, you can find me hiking,
-                reading tech blogs, or experimenting with new frameworks.
+                I'm always trying to improve my skills and learn new things.
+                Apart from coding, I spend time reading tech blogs and
+                experimenting with small projects.
               </p>
 
               <h3
                 style={{
                   marginTop: "30px",
                   marginBottom: "15px",
-                  color: "var(--light)",
+                  background: "linear-gradient(135deg, #00bcd4, #ff5722)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
                 Skills & Technologies
@@ -131,14 +144,18 @@ const About = () => {
                     key={index}
                     className="skill-tag"
                     style={{
-                      background: "rgba(37, 99, 235, 0.2)",
-                      color: "var(--primary)",
+                      background:
+                        "linear-gradient(135deg, rgba(0, 188, 212, 0.2), rgba(255, 87, 34, 0.2))",
+                      color: "#00bcd4",
                       padding: "8px 15px",
                       borderRadius: "30px",
                       fontSize: "0.9rem",
                       fontWeight: "500",
-                      transition: "var(--transition)",
+                      transition:
+                        "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                       cursor: "pointer",
+                      position: "relative",
+                      overflow: "hidden",
                     }}
                   >
                     {skill}
@@ -156,7 +173,7 @@ const About = () => {
                 transition: "opacity 0.6s ease, transform 0.6s ease",
                 borderRadius: "10px",
                 overflow: "hidden",
-                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+                boxShadow: "0 20px 40px rgba(0, 188, 212, 0.2)",
                 position: "relative",
               }}
             >
@@ -165,27 +182,34 @@ const About = () => {
                 style={{
                   width: "100%",
                   height: "400px",
-                  background:
-                    "linear-gradient(45deg, var(--primary), var(--secondary))",
+                  background: "linear-gradient(45deg, #00bcd4, #ff5722)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "white",
                   fontSize: "1.5rem",
                   fontWeight: "bold",
+                  transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 }}
               >
                 <div style={{ textAlign: "center" }}>
                   <i
                     className="fas fa-user"
-                    style={{ fontSize: "4rem", marginBottom: "20px" }}
+                    style={{
+                      fontSize: "4rem",
+                      marginBottom: "20px",
+                      filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))",
+                    }}
                   ></i>
-                  <div>Lakki Joshi</div>
+                  <div style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}>
+                    Lakki Joshi
+                  </div>
                   <div
                     style={{
                       fontSize: "1rem",
                       opacity: 0.9,
                       marginTop: "10px",
+                      textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
                     }}
                   >
                     Full Stack Developer
@@ -197,11 +221,34 @@ const About = () => {
         </div>
 
         <style jsx="true">{`
-          /* Desktop styles */
+          .skill-tag::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.3),
+              transparent
+            );
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          }
+
+          .skill-tag:hover::before {
+            left: 100%;
+          }
+
           .skill-tag:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 188, 212, 0.3),
+              rgba(255, 87, 34, 0.3)
+            );
           }
 
           .about-img::before {
@@ -211,13 +258,9 @@ const About = () => {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-              45deg,
-              var(--primary),
-              var(--secondary)
-            );
+            background: linear-gradient(45deg, #00bcd4, #ff5722);
             opacity: 0;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1;
           }
 
@@ -229,7 +272,6 @@ const About = () => {
             transform: scale(1.05);
           }
 
-          /* Responsive styles */
           @media (max-width: 1200px) {
             .about-content {
               gap: 40px !important;
@@ -361,7 +403,6 @@ const About = () => {
             }
           }
 
-          /* For very small screens */
           @media (max-width: 320px) {
             .skills-container {
               gap: 5px !important;
@@ -377,7 +418,6 @@ const About = () => {
             }
           }
 
-          /* For landscape mode on mobile */
           @media (max-height: 500px) and (orientation: landscape) {
             .about-content {
               grid-template-columns: 1fr 1fr !important;
@@ -389,7 +429,6 @@ const About = () => {
             }
           }
 
-          /* For tablet portrait */
           @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
             .about-content {
               grid-template-columns: 1fr !important;
@@ -401,7 +440,6 @@ const About = () => {
             }
           }
 
-          /* For tablet landscape */
           @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
             .about-content {
               grid-template-columns: 1fr 1fr !important;

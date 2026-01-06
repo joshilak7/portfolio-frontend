@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import emailjs from "@emailjs/browser"; // ✅ EmailJS import
+import emailjs from "@emailjs/browser";
 import { Helmet } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -30,10 +30,9 @@ const Contact = () => {
     setSuccess(false);
 
     try {
-      // Replace these with your actual EmailJS values
-      const serviceID = "service_6st8c7j"; // e.g., service_abc123
-      const templateID = "template_k8juz5k"; // e.g., template_xyz456
-      const publicKey = "HLWK7Nm8fBGlwRTwn"; // e.g., user_1234567890
+      const serviceID = "service_6st8c7j";
+      const templateID = "template_k8juz5k";
+      const publicKey = "HLWK7Nm8fBGlwRTwn";
 
       await emailjs.send(serviceID, templateID, formData, publicKey);
 
@@ -85,18 +84,19 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Projects | MERN Stack Portfolio</title>
+        <title>Contact | MERN Stack Developer</title>
         <meta
           name="description"
-          content="Real-world MERN stack projects including full-stack and Web3 applications."
+          content="Get in touch with Lakki Joshi, MERN Stack Developer for project inquiries and collaborations."
         />
-        <link rel="canonical" href="https://lakkijoshi.vercel.app/" />
+        <link rel="canonical" href="https://lakkijoshi.vercel.app/contact" />
       </Helmet>
       <section
         className="contact"
         id="contact"
         style={{
-          background: "rgba(30, 41, 59, 0.7)",
+          background:
+            "linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9))",
           backdropFilter: "blur(5px)",
         }}
       >
@@ -122,7 +122,6 @@ const Contact = () => {
               gap: "50px",
             }}
           >
-            {/* Contact Info */}
             <div
               className="contact-info"
               style={{
@@ -146,11 +145,13 @@ const Contact = () => {
                       alignItems: "center",
                       gap: "15px",
                       padding: "20px",
-                      background: "rgba(30, 41, 59, 0.5)",
+                      background:
+                        "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                       borderRadius: "10px",
                       textDecoration: "none",
                       color: "inherit",
-                      transition: "var(--transition)",
+                      transition:
+                        "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     }}
                   >
                     <div
@@ -158,14 +159,16 @@ const Contact = () => {
                       style={{
                         width: "60px",
                         height: "60px",
-                        background: "rgba(37, 99, 235, 0.2)",
+                        background:
+                          "linear-gradient(135deg, rgba(0, 188, 212, 0.2), rgba(255, 87, 34, 0.2))",
                         borderRadius: "50%",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        color: "var(--primary)",
+                        color: "#00bcd4",
                         fontSize: "1.5rem",
-                        transition: "var(--transition)",
+                        transition:
+                          "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                         flexShrink: 0,
                       }}
                     >
@@ -195,9 +198,11 @@ const Contact = () => {
                       alignItems: "center",
                       gap: "15px",
                       padding: "20px",
-                      background: "rgba(30, 41, 59, 0.5)",
+                      background:
+                        "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                       borderRadius: "10px",
-                      transition: "var(--transition)",
+                      transition:
+                        "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     }}
                   >
                     <div
@@ -205,14 +210,16 @@ const Contact = () => {
                       style={{
                         width: "60px",
                         height: "60px",
-                        background: "rgba(37, 99, 235, 0.2)",
+                        background:
+                          "linear-gradient(135deg, rgba(0, 188, 212, 0.2), rgba(255, 87, 34, 0.2))",
                         borderRadius: "50%",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        color: "var(--primary)",
+                        color: "#00bcd4",
                         fontSize: "1.5rem",
-                        transition: "var(--transition)",
+                        transition:
+                          "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                         flexShrink: 0,
                       }}
                     >
@@ -237,7 +244,6 @@ const Contact = () => {
               )}
             </div>
 
-            {/* Contact Form */}
             <form
               onSubmit={handleSubmit}
               className="contact-form"
@@ -246,17 +252,21 @@ const Contact = () => {
                 flexDirection: "column",
                 gap: "20px",
                 padding: "40px",
-                background: "rgba(30, 41, 59, 0.5)",
+                background:
+                  "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                 borderRadius: "15px",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(0, 188, 212, 0.2)",
               }}
             >
               {success && (
                 <div
                   className="success-message"
                   style={{
-                    background: "rgba(0, 188, 212, 0.1)",
-                    borderLeft: "4px solid var(--primary)",
+                    background:
+                      "linear-gradient(135deg, rgba(0, 188, 212, 0.15), rgba(255, 87, 34, 0.15))",
+                    borderLeft: "4px solid",
+                    borderImage:
+                      "linear-gradient(to bottom, #00bcd4, #ff5722) 1",
                     padding: "15px",
                     borderRadius: "5px",
                     marginBottom: "20px",
@@ -266,7 +276,7 @@ const Contact = () => {
                 >
                   <i
                     className="fas fa-check-circle"
-                    style={{ marginRight: "10px", color: "var(--primary)" }}
+                    style={{ marginRight: "10px", color: "#00bcd4" }}
                   ></i>
                   Thank you for your message! I will get back to you soon.
                 </div>
@@ -276,8 +286,11 @@ const Contact = () => {
                 <div
                   className="error-message"
                   style={{
-                    background: "rgba(255, 87, 34, 0.1)",
-                    borderLeft: "4px solid var(--secondary)",
+                    background:
+                      "linear-gradient(135deg, rgba(255, 87, 34, 0.15), rgba(255, 193, 7, 0.15))",
+                    borderLeft: "4px solid",
+                    borderImage:
+                      "linear-gradient(to bottom, #ff5722, #ffc107) 1",
                     padding: "15px",
                     borderRadius: "5px",
                     marginBottom: "20px",
@@ -287,13 +300,12 @@ const Contact = () => {
                 >
                   <i
                     className="fas fa-exclamation-circle"
-                    style={{ marginRight: "10px", color: "var(--secondary)" }}
+                    style={{ marginRight: "10px", color: "#ff5722" }}
                   ></i>
                   {error}
                 </div>
               )}
 
-              {/* Input fields */}
               <div className="form-group">
                 <label
                   htmlFor="name"
@@ -303,7 +315,7 @@ const Contact = () => {
                     fontSize: "0.95rem",
                   }}
                 >
-                  Name <span style={{ color: "var(--secondary)" }}>*</span>
+                  Name <span style={{ color: "#ff5722" }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -313,12 +325,13 @@ const Contact = () => {
                   required
                   style={{
                     padding: "15px",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(0, 188, 212, 0.2)",
                     borderRadius: "8px",
-                    background: "rgba(255, 255, 255, 0.05)",
+                    background:
+                      "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                     color: "var(--light)",
                     fontSize: "1rem",
-                    transition: "var(--transition)",
+                    transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     width: "100%",
                   }}
                   placeholder="Your Name"
@@ -334,7 +347,7 @@ const Contact = () => {
                     fontSize: "0.95rem",
                   }}
                 >
-                  Email <span style={{ color: "var(--secondary)" }}>*</span>
+                  Email <span style={{ color: "#ff5722" }}>*</span>
                 </label>
                 <input
                   type="email"
@@ -344,12 +357,13 @@ const Contact = () => {
                   required
                   style={{
                     padding: "15px",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(0, 188, 212, 0.2)",
                     borderRadius: "8px",
-                    background: "rgba(255, 255, 255, 0.05)",
+                    background:
+                      "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                     color: "var(--light)",
                     fontSize: "1rem",
-                    transition: "var(--transition)",
+                    transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     width: "100%",
                   }}
                   placeholder="your.email@example.com"
@@ -382,12 +396,14 @@ const Contact = () => {
                     onChange={handleChange}
                     style={{
                       padding: "15px",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      border: "1px solid rgba(0, 188, 212, 0.2)",
                       borderRadius: "8px",
-                      background: "rgba(255, 255, 255, 0.05)",
+                      background:
+                        "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                       color: "var(--light)",
                       fontSize: "1rem",
-                      transition: "var(--transition)",
+                      transition:
+                        "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                       width: "100%",
                     }}
                     placeholder="+91 12345 67890"
@@ -412,12 +428,14 @@ const Contact = () => {
                     onChange={handleChange}
                     style={{
                       padding: "15px",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      border: "1px solid rgba(0, 188, 212, 0.2)",
                       borderRadius: "8px",
-                      background: "rgba(255, 255, 255, 0.05)",
+                      background:
+                        "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                       color: "var(--light)",
                       fontSize: "1rem",
-                      transition: "var(--transition)",
+                      transition:
+                        "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                       width: "100%",
                     }}
                     placeholder="Project Inquiry"
@@ -434,7 +452,7 @@ const Contact = () => {
                     fontSize: "0.95rem",
                   }}
                 >
-                  Message <span style={{ color: "var(--secondary)" }}>*</span>
+                  Message <span style={{ color: "#ff5722" }}>*</span>
                 </label>
                 <textarea
                   id="message"
@@ -444,13 +462,14 @@ const Contact = () => {
                   rows="6"
                   style={{
                     padding: "15px",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(0, 188, 212, 0.2)",
                     borderRadius: "8px",
-                    background: "rgba(255, 255, 255, 0.05)",
+                    background:
+                      "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))",
                     color: "var(--light)",
                     fontSize: "1rem",
                     resize: "vertical",
-                    transition: "var(--transition)",
+                    transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     minHeight: "150px",
                     width: "100%",
                   }}
@@ -468,6 +487,16 @@ const Contact = () => {
                   fontSize: "1rem",
                   fontWeight: "600",
                   width: "100%",
+                  background: "linear-gradient(135deg, #00bcd4, #ff5722)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  position: "relative",
+                  overflow: "hidden",
+                  zIndex: "1",
                 }}
               >
                 {loading ? (
@@ -485,33 +514,58 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Responsive Styles */}
         <style jsx="true">{`
-          /* Base styles */
           input:focus,
           textarea:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+            border-color: #00bcd4;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
             transform: translateY(-3px);
           }
 
-          a:hover,
-          div[style*="background: rgba(30, 41, 59, 0.5)"]:hover {
+          .contact-item:hover {
             transform: translateX(10px);
-            background: rgba(37, 99, 235, 0.1) !important;
-            border-color: var(--primary);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 188, 212, 0.15),
+              rgba(255, 87, 34, 0.15)
+            ) !important;
+            border-color: #00bcd4;
           }
 
-          a:hover > div:first-child,
-          div[style*="background: rgba(30, 41, 59, 0.5)"]:hover
-            > div:first-child {
-            background: var(--primary) !important;
+          .contact-item:hover > div:first-child {
+            background: linear-gradient(135deg, #00bcd4, #ff5722) !important;
             color: white !important;
             transform: rotate(15deg) scale(1.1);
           }
 
-          /* Animation */
+          .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.4),
+              transparent
+            );
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+          }
+
+          .btn:hover::before {
+            left: 100%;
+          }
+
+          .btn:hover {
+            background: linear-gradient(135deg, #008ba3, #e64a19);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 188, 212, 0.3);
+          }
+
           @keyframes fadeInUp {
             from {
               opacity: 0;
@@ -523,7 +577,6 @@ const Contact = () => {
             }
           }
 
-          /* Large Desktop (1200px+) */
           @media (max-width: 1200px) {
             .contact-container {
               gap: 40px !important;
@@ -534,7 +587,6 @@ const Contact = () => {
             }
           }
 
-          /* Desktop (992px - 1199px) */
           @media (max-width: 992px) {
             .contact-container {
               grid-template-columns: 1fr !important;
@@ -569,7 +621,6 @@ const Contact = () => {
             }
           }
 
-          /* Tablet (768px - 991px) */
           @media (max-width: 768px) {
             h2 {
               font-size: 2rem !important;
@@ -632,7 +683,6 @@ const Contact = () => {
             }
           }
 
-          /* Mobile Large (576px - 767px) */
           @media (max-width: 576px) {
             h2 {
               font-size: 1.8rem !important;
@@ -698,7 +748,6 @@ const Contact = () => {
             }
           }
 
-          /* Mobile Small (400px - 575px) */
           @media (max-width: 400px) {
             h2 {
               font-size: 1.6rem !important;
@@ -764,7 +813,6 @@ const Contact = () => {
             }
           }
 
-          /* Extra Small (320px - 399px) */
           @media (max-width: 320px) {
             .contact-item {
               padding: 10px !important;
@@ -792,7 +840,6 @@ const Contact = () => {
             }
           }
 
-          /* Landscape Mode for Mobile */
           @media (max-height: 500px) and (orientation: landscape) {
             .contact-container {
               grid-template-columns: 1fr 1fr !important;
@@ -816,7 +863,6 @@ const Contact = () => {
             }
           }
 
-          /* Tablet Portrait */
           @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
             .contact-container {
               grid-template-columns: 1fr !important;
@@ -828,7 +874,6 @@ const Contact = () => {
             }
           }
 
-          /* Tablet Landscape */
           @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
             .contact-container {
               grid-template-columns: 1fr 1fr !important;
@@ -840,7 +885,6 @@ const Contact = () => {
             }
           }
 
-          /* Fix for very small heights */
           @media (max-height: 600px) {
             .contact-form {
               padding: 20px !important;

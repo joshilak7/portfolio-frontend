@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { Helmet } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react";
 
-// Memoized ProjectCard component to prevent unnecessary re-renders
 const ProjectCard = memo(({ project, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = React.useRef(null);
@@ -12,7 +11,7 @@ const ProjectCard = memo(({ project, index }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // Stop observing once visible
+          observer.disconnect();
         }
       },
       { threshold: 0.1, rootMargin: "50px" }
@@ -37,7 +36,7 @@ const ProjectCard = memo(({ project, index }) => {
         transition: "var(--transition)",
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(20px)",
-        willChange: "transform, opacity", // Hint browser for optimization
+        willChange: "transform, opacity",
       }}
       data-project-id={project.id}
     >
@@ -46,7 +45,7 @@ const ProjectCard = memo(({ project, index }) => {
           height: "200px",
           overflow: "hidden",
           position: "relative",
-          contain: "paint", // CSS containment for performance
+          contain: "paint",
         }}
       >
         <div
@@ -185,7 +184,6 @@ const ProjectCard = memo(({ project, index }) => {
   );
 });
 
-// Preload function for Font Awesome icons
 const preloadFontAwesome = () => {
   if (typeof window !== "undefined") {
     const link = document.createElement("link");
@@ -199,7 +197,6 @@ const preloadFontAwesome = () => {
 };
 
 const Projects = () => {
-  // Memoize projects data to prevent unnecessary re-renders
   const projects = useMemo(
     () => [
       {
@@ -238,28 +235,24 @@ const Projects = () => {
         githubUrl: "https://github.com/joshilak7",
         imageColor: "linear-gradient(45deg, var(--accent), var(--primary))",
       },
-      // Add more projects here if needed
     ],
     []
   );
 
-  const [visibleProjects, setVisibleProjects] = useState(2); // Start with 2 instead of 3
+  const [visibleProjects, setVisibleProjects] = useState(2);
   const [loading, setLoading] = useState(false);
 
-  // Memoize loadMore function to prevent unnecessary re-renders
   const loadMore = useCallback(() => {
     setLoading(true);
     setTimeout(() => {
       setVisibleProjects((prev) => Math.min(prev + 2, projects.length));
       setLoading(false);
-    }, 300); // Reduced from 500ms
+    }, 300);
   }, [projects.length]);
 
-  // Preload resources on component mount
   useEffect(() => {
     preloadFontAwesome();
 
-    // Preconnect to critical domains
     const preconnectLinks = [
       "https://fonts.googleapis.com",
       "https://fonts.gstatic.com",
@@ -275,7 +268,6 @@ const Projects = () => {
     });
   }, []);
 
-  // Calculate visible projects to render
   const projectsToRender = useMemo(
     () => projects.slice(0, visibleProjects),
     [projects, visibleProjects]
@@ -290,7 +282,6 @@ const Projects = () => {
           content="Real-world MERN stack projects including full-stack and Web3 applications."
         />
         <link rel="canonical" href="https://lakkijoshi.vercel.app/projects" />
-        {/* Preload critical resources */}
         <link
           rel="preload"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2"
@@ -307,7 +298,7 @@ const Projects = () => {
         style={{
           background: "rgba(30, 41, 59, 0.5)",
           backdropFilter: "blur(5px)",
-          contentVisibility: "auto", // Performance optimization
+          contentVisibility: "auto",
         }}
       >
         <div className="container">
@@ -329,7 +320,7 @@ const Projects = () => {
               gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
               gap: "30px",
               marginBottom: "50px",
-              contain: "layout style", // CSS containment for performance
+              contain: "layout style",
             }}
             className="projects-grid"
           >
@@ -347,7 +338,7 @@ const Projects = () => {
                 style={{
                   padding: "15px 40px",
                   fontSize: "1rem",
-                  willChange: "transform", // Hint for animation optimization
+                  willChange: "transform",
                 }}
                 aria-label="Load more projects"
               >
@@ -543,5 +534,4 @@ const Projects = () => {
   );
 };
 
-// Export as memoized component
 export default memo(Projects);

@@ -24,7 +24,6 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -33,12 +32,10 @@ api.interceptors.response.use(
   }
 );
 
-// Contact API
 export const submitContact = (contactData) => api.post("/contact", contactData);
 
 export const getContacts = () => api.get("/contact");
 
-// Projects API
 export const getProjects = (params = {}) => api.get("/projects", { params });
 
 export const getProjectById = (id) => api.get(`/projects/${id}`);
@@ -53,7 +50,6 @@ export const updateProject = (id, projectData) =>
 
 export const deleteProject = (id) => api.delete(`/projects/${id}`);
 
-// Auth API
 export const login = (credentials) => api.post("/auth/login", credentials);
 
 export const register = (userData) => api.post("/auth/register", userData);
@@ -62,7 +58,6 @@ export const getMe = () => api.get("/auth/me");
 
 export const logout = () => api.get("/auth/logout");
 
-// Health check
 export const healthCheck = () => api.get("/health");
 
 export default api;

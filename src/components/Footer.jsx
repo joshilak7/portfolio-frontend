@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import { Analytics } from "@vercel/analytics/react";
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -27,19 +26,16 @@ const Footer = () => {
       icon: "fab fa-github",
       url: "https://github.com/joshilak7",
       title: "GitHub",
-      color: "#333",
     },
     {
       icon: "fab fa-linkedin-in",
       url: "https://www.linkedin.com/in/lakki-joshi-5a5958388",
       title: "LinkedIn",
-      color: "#0077b5",
     },
     {
       icon: "fab fa-youtube",
-      url: "www.youtube.com/@luckcricket7",
+      url: "https://www.youtube.com/@luckcricket7",
       title: "YouTube",
-      color: "#ff0000",
     },
   ];
 
@@ -52,68 +48,19 @@ const Footer = () => {
   ];
 
   return (
-    <footer
-      style={{
-        background: "rgba(15, 23, 42, 0.9)",
-        padding: "60px 0 30px",
-        borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-      }}
-      className="footer-container"
-    >
+    <footer className="footer-container">
       <div className="container">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-          className="footer-content"
-        >
-          <Link
-            to="home"
-            smooth={true}
-            duration={500}
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "800",
-              background:
-                "linear-gradient(135deg, var(--primary), var(--accent))",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-              textDecoration: "none",
-              marginBottom: "20px",
-            }}
-            className="footer-logo"
-          >
+        <div className="footer-content">
+          <Link to="home" smooth={true} duration={500} className="footer-logo">
             Lakki Joshi
           </Link>
 
-          <p
-            style={{
-              maxWidth: "600px",
-              margin: "0 auto 30px",
-              fontSize: "1.1rem",
-              color: "var(--gray)",
-              lineHeight: "1.6",
-            }}
-            className="footer-description"
-          >
-            Full Stack Developer & UI/UX Designer passionate about creating
-            beautiful, functional web experiences that make a difference.
+          <p className="footer-description">
+            Full Stack Developer and UI/UX Designer who enjoys building clean
+            and easy-to-use web experiences.
           </p>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "20px",
-              margin: "30px 0",
-              flexWrap: "wrap",
-            }}
-            className="social-links-container"
-          >
+          <div className="social-links-container">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
@@ -121,20 +68,6 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={link.title}
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  borderRadius: "12px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "var(--light)",
-                  fontSize: "1.3rem",
-                  transition: "var(--transition)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  textDecoration: "none",
-                }}
                 className="social-link"
               >
                 <i className={link.icon}></i>
@@ -142,16 +75,7 @@ const Footer = () => {
             ))}
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "30px",
-              margin: "30px 0",
-              flexWrap: "wrap",
-            }}
-            className="quick-links-container"
-          >
+          <div className="quick-links-container">
             {quickLinks.map((link, index) =>
               link.url ? (
                 <a
@@ -159,15 +83,6 @@ const Footer = () => {
                   href={link.url}
                   target={link.label === "Resume" ? "_blank" : "_self"}
                   rel="noopener noreferrer"
-                  style={{
-                    color: "var(--gray)",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    transition: "var(--transition)",
-                    padding: "5px 0",
-                    position: "relative",
-                    fontSize: "1rem",
-                  }}
                   className="footer-link"
                 >
                   {link.label}
@@ -179,16 +94,6 @@ const Footer = () => {
                   smooth={true}
                   duration={500}
                   offset={-80}
-                  style={{
-                    color: "var(--gray)",
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    transition: "var(--transition)",
-                    padding: "5px 0",
-                    position: "relative",
-                    cursor: "pointer",
-                    fontSize: "1rem",
-                  }}
                   className="footer-link"
                 >
                   {link.label}
@@ -197,198 +102,307 @@ const Footer = () => {
             )}
           </div>
 
-          <div
-            style={{
-              marginTop: "40px",
-              paddingTop: "30px",
-              borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-              width: "100%",
-              color: "var(--gray)",
-              fontSize: "0.9rem",
-            }}
-            className="footer-bottom"
-          >
+          <div className="footer-bottom">
             <p>&copy; {currentYear} Lakki Joshi. All Rights Reserved.</p>
-            <p style={{ marginTop: "10px", opacity: 0.7 }}>
-              Built with React, Node.js, and{" "}
-              <span style={{ color: "var(--secondary)" }}>❤️</span>
+            <p>
+              Built with React, Node.js, and <span className="heart">❤️</span>
             </p>
           </div>
         </div>
       </div>
 
-      {/* Scroll to Top Button */}
-      <button
-        className={`scroll-top ${showScrollTop ? "visible" : ""}`}
-        onClick={scrollToTop}
-        style={{
-          position: "fixed",
-          bottom: "30px",
-          right: "30px",
-          width: "50px",
-          height: "50px",
-          background: "var(--primary)",
-          color: "white",
-          border: "none",
-          borderRadius: "50%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "1.2rem",
-          cursor: "pointer",
-          opacity: "0",
-          visibility: "hidden",
-          transition: "var(--transition)",
-          zIndex: "999",
-          boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
-        }}
-      >
-        <i className="fas fa-arrow-up"></i>
-      </button>
-
       <style jsx="true">{`
-        /* Base hover effects */
-        a {
-          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        :root {
+          --primary: #00bcd4;
+          --secondary: #ff5722;
+          --accent: #ffc107;
+          --dark: #1e293b;
+          --light: #f8fafc;
+          --gray: #64748b;
+          --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        a:hover,
-        .scroll-top:hover {
-          color: var(--primary) !important;
-          transform: translateY(-5px);
+        .footer-container {
+          background: linear-gradient(
+            135deg,
+            rgba(15, 23, 42, 0.95),
+            rgba(30, 41, 59, 0.9)
+          );
+          padding: 60px 0 30px;
+          border-top: 1px solid rgba(0, 188, 212, 0.2);
+          width: 100%;
         }
 
-        .footer-link:hover::after {
+        .footer-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .footer-logo {
+          font-size: 2.5rem;
+          font-weight: 800;
+          background: linear-gradient(135deg, #00bcd4, #ff5722, #ffc107);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-decoration: none;
+          margin-bottom: 20px;
+          position: relative;
+          overflow: hidden;
+          transition: var(--transition);
+          cursor: pointer;
+        }
+
+        .footer-logo::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: -100%;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            #00bcd4,
+            #ff5722,
+            transparent
+          );
+          transition: var(--transition);
+        }
+
+        .footer-logo:hover::after {
+          left: 100%;
+        }
+
+        .footer-logo:hover {
+          transform: translateY(-3px);
+        }
+
+        .footer-description {
+          max-width: 600px;
+          margin: 0 auto 30px;
+          font-size: 1.1rem;
+          color: var(--gray);
+          line-height: 1.6;
+        }
+
+        .social-links-container {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin: 30px 0;
+          flex-wrap: wrap;
+        }
+
+        .social-link {
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(
+            135deg,
+            rgba(0, 188, 212, 0.2),
+            rgba(255, 87, 34, 0.2)
+          );
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--light);
+          font-size: 1.3rem;
+          transition: var(--transition);
+          border: 1px solid rgba(0, 188, 212, 0.2);
+          text-decoration: none;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .social-link::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #00bcd4, #ff5722);
+          border-radius: 12px;
+          transform: scale(0);
+          transition: var(--transition);
+          z-index: -1;
+        }
+
+        .social-link:hover::before {
+          transform: scale(1);
+        }
+
+        .social-link:hover {
+          color: white;
+          transform: translateY(-5px) rotate(10deg);
+          border-color: transparent;
+        }
+
+        .quick-links-container {
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          margin: 30px 0;
+          flex-wrap: wrap;
+        }
+
+        .footer-link {
+          color: var(--gray);
+          text-decoration: none;
+          font-weight: 500;
+          transition: var(--transition);
+          padding: 5px 0;
+          position: relative;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+
+        .footer-link::after {
           content: "";
           position: absolute;
           bottom: 0;
           left: 0;
-          width: 100%;
+          width: 0;
           height: 2px;
-          background: var(--primary);
+          background: linear-gradient(to right, #00bcd4, #ff5722);
+          transition: var(--transition);
         }
 
-        .social-link {
-          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .footer-link:hover::after {
+          width: 100%;
         }
 
-        .social-link:hover {
-          background: var(--primary) !important;
-          color: white !important;
-          transform: translateY(-5px) rotate(10deg);
-          border-color: var(--primary) !important;
+        .footer-link:hover {
+          color: var(--primary);
+          transform: translateY(-3px);
         }
 
-        .scroll-top.visible {
-          opacity: 1 !important;
-          visibility: visible !important;
+        .footer-bottom {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid rgba(0, 188, 212, 0.2);
+          width: 100%;
+          color: var(--gray);
+          font-size: 0.9rem;
         }
 
-        /* MOBILE RESPONSIVE STYLES */
+        .footer-bottom p {
+          margin: 8px 0;
+        }
+
+        .heart {
+          color: var(--secondary);
+        }
+
         @media (max-width: 768px) {
-          /* Footer container */
           .footer-container {
-            padding: 40px 0 25px !important;
+            padding: 40px 0 25px;
           }
 
-          .container {
-            padding: 0 20px !important;
-          }
-
-          /* Footer logo */
-          .footer-logo {
-            font-size: 2rem !important;
-            margin-bottom: 15px !important;
-          }
-
-          /* Description */
-          .footer-description {
-            font-size: 1rem !important;
+          .footer-content {
             padding: 0 15px;
-            margin-bottom: 25px !important;
+          }
+
+          .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 15px;
+          }
+
+          .footer-description {
+            font-size: 1rem;
+            margin-bottom: 25px;
             line-height: 1.5;
           }
 
-          /* Social links */
           .social-links-container {
-            gap: 15px !important;
-            margin: 20px 0 !important;
+            gap: 15px;
+            margin: 20px 0;
           }
 
           .social-link {
-            width: 45px !important;
-            height: 45px !important;
-            font-size: 1.2rem !important;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
           }
 
-          /* Quick links */
           .quick-links-container {
-            flex-direction: column !important;
-            gap: 15px !important;
-            margin: 20px 0 !important;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
             width: 100%;
             max-width: 300px;
           }
 
           .footer-link {
-            font-size: 1.1rem !important;
-            padding: 12px 20px !important;
-            background: rgba(255, 255, 255, 0.03);
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            background: linear-gradient(
+              135deg,
+              rgba(30, 41, 59, 0.6),
+              rgba(15, 23, 42, 0.7)
+            );
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 188, 212, 0.2);
             width: 100%;
             text-align: center;
           }
 
+          .footer-link::after {
+            display: none;
+          }
+
           .footer-link:hover {
-            background: rgba(37, 99, 235, 0.1);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 188, 212, 0.15),
+              rgba(255, 87, 34, 0.15)
+            );
             transform: translateY(-3px);
           }
 
-          .footer-link::after {
-            display: none !important;
-          }
-
-          /* Footer bottom */
           .footer-bottom {
-            margin-top: 30px !important;
-            padding-top: 20px !important;
-            font-size: 0.85rem !important;
+            margin-top: 30px;
+            padding-top: 20px;
+            font-size: 0.85rem;
           }
 
-          .footer-bottom p {
-            margin: 8px 0;
-          }
-
-          /* Scroll to top button */
           .scroll-top {
-            width: 45px !important;
-            height: 45px !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            font-size: 1.1rem !important;
+            width: 45px;
+            height: 45px;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.1rem;
           }
         }
 
-        /* Small phones */
         @media (max-width: 480px) {
           .footer-container {
-            padding: 30px 0 20px !important;
+            padding: 30px 0 20px;
           }
 
-          .footer-logo {
-            font-size: 1.8rem !important;
-          }
-
-          .footer-description {
-            font-size: 0.95rem !important;
+          .footer-content {
             padding: 0 10px;
           }
 
+          .footer-logo {
+            font-size: 1.8rem;
+          }
+
+          .footer-description {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+          }
+
           .social-link {
-            width: 40px !important;
-            height: 40px !important;
-            font-size: 1.1rem !important;
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
           }
 
           .quick-links-container {
@@ -396,66 +410,15 @@ const Footer = () => {
           }
 
           .footer-link {
-            font-size: 1rem !important;
-            padding: 10px 15px !important;
+            font-size: 1rem;
+            padding: 10px 15px;
           }
 
           .footer-bottom {
-            font-size: 0.8rem !important;
-            padding: 0 10px;
+            font-size: 0.8rem;
           }
 
-          .scroll-top {
-            width: 40px !important;
-            height: 40px !important;
-            bottom: 15px !important;
-            right: 15px !important;
-            font-size: 1rem !important;
-          }
-        }
 
-        /* Large phones and small tablets */
-        @media (min-width: 481px) and (max-width: 768px) {
-          .footer-logo {
-            font-size: 2.2rem !important;
-          }
-
-          .footer-description {
-            font-size: 1.05rem !important;
-            max-width: 500px;
-          }
-
-          .social-link {
-            width: 48px !important;
-            height: 48px !important;
-          }
-
-          .quick-links-container {
-            max-width: 350px;
-          }
-
-          .footer-link {
-            font-size: 1.15rem !important;
-          }
-        }
-
-        /* Tablet landscape */
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .footer-container {
-            padding: 50px 0 30px !important;
-          }
-
-          .footer-description {
-            font-size: 1.05rem !important;
-            max-width: 550px;
-          }
-
-          .quick-links-container {
-            gap: 25px !important;
-          }
-        }
-
-        /* Fix for touch devices */
         @media (hover: none) and (pointer: coarse) {
           .social-link:active,
           .footer-link:active {
@@ -463,24 +426,11 @@ const Footer = () => {
             transition: transform 0.2s ease;
           }
 
-          .scroll-top:active {
-            transform: scale(0.95);
-          }
-        }
-
-        /* Accessibility improvements */
         .footer-link:focus,
-        .social-link:focus {
+        .social-link:focus,
+        .scroll-top:focus {
           outline: 2px solid var(--primary);
           outline-offset: 2px;
-        }
-
-        /* Improve text readability on mobile */
-        @media (max-width: 768px) {
-          * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-          }
         }
       `}</style>
     </footer>

@@ -5,7 +5,6 @@
   overflow-x: hidden;
 }
 
-/* Animated Background */
 .animated-bg {
   position: fixed;
   top: 0;
@@ -19,7 +18,7 @@
 .bg-shape {
   position: absolute;
   border-radius: 50%;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   animation: float 20s infinite linear;
 }
 
@@ -53,7 +52,7 @@
   top: 60%;
   left: 80%;
   animation-delay: -5s;
-  background: rgba(124, 58, 237, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .shape-3 {
@@ -62,7 +61,7 @@
   top: 30%;
   left: 70%;
   animation-delay: -10s;
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .shape-4 {
@@ -71,10 +70,9 @@
   top: 80%;
   left: 10%;
   animation-delay: -15s;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Loading Screen */
 .loading-screen {
   display: flex;
   flex-direction: column;
@@ -88,7 +86,7 @@
 .loading-spinner {
   width: 50px;
   height: 50px;
-  border: 3px solid rgba(0, 188, 212, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top-color: var(--primary);
   animation: spin 1s ease-in-out infinite;
@@ -101,7 +99,6 @@
   }
 }
 
-/* Scroll to top button */
 .scroll-to-top {
   position: fixed;
   bottom: 30px;
@@ -133,9 +130,6 @@
   transform: translateY(-5px);
 }
 
-/* ============= RESPONSIVE STYLES ============= */
-
-/* Large devices (desktops, less than 1200px) */
 @media (max-width: 1199.98px) {
   .shape-1 {
     width: 250px;
@@ -154,7 +148,6 @@
   }
 }
 
-/* Medium devices (tablets, less than 992px) */
 @media (max-width: 991.98px) {
   .shape-1 {
     width: 200px;
@@ -190,7 +183,6 @@
   }
 }
 
-/* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
   .animated-bg {
     opacity: 0.8;
@@ -238,7 +230,6 @@
   }
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
   .animated-bg {
     opacity: 0.6;
@@ -295,7 +286,6 @@
   }
 }
 
-/* Very small devices (less than 400px) */
 @media (max-width: 399.98px) {
   .shape-1 {
     width: 100px;
@@ -328,7 +318,6 @@
   }
 }
 
-/* For devices with reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .bg-shape {
     animation: none;
@@ -343,7 +332,6 @@
   }
 }
 
-/* For touch devices */
 @media (hover: none) and (pointer: coarse) {
   .scroll-to-top {
     opacity: 0.9;
@@ -359,7 +347,6 @@
   }
 }
 
-/* Landscape orientation for mobile */
 @media (max-height: 500px) and (orientation: landscape) {
   .loading-screen {
     padding: 20px 0;
@@ -373,7 +360,6 @@
   }
 }
 
-/* High-resolution displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .bg-shape {
     backdrop-filter: blur(1px);

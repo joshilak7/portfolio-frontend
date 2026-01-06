@@ -61,9 +61,8 @@ const Hero = () => {
                 animation: "fadeInUp 1s ease-out 0.3s both",
               }}
             >
-              I create beautiful, functional websites and applications that
-              deliver exceptional user experiences. Let's build something
-              amazing together.
+              I create websites and applications that work well and are easy for
+              users to understand.
             </p>
 
             <div

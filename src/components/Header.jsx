@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import { Analytics } from "@vercel/analytics/react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,11 +21,29 @@ const Header = () => {
     { id: "contact", label: "Contact" },
   ];
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
   return (
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="container">
         <nav className="nav-container">
-          <Link to="home" smooth={true} duration={500} className="logo">
+          <Link
+            to="home"
+            smooth={true}
+            duration={500}
+            className="logo"
+            onClick={closeMenu}
+          >
             Lakki Joshi
           </Link>
 
@@ -55,41 +72,58 @@ const Header = () => {
       </div>
 
       <style jsx="true">{`
-        /* HEADER */
+        :root {
+          --primary: #00bcd4;
+          --secondary: #ff5722;
+          --light: #f8fafc;
+          --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         .header {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           z-index: 1000;
-          background: rgba(30, 41, 59, 0.9);
+          background: linear-gradient(
+            to bottom,
+            rgba(30, 41, 59, 0.95),
+            rgba(30, 41, 59, 0.85)
+          );
           backdrop-filter: blur(10px);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          box-shadow: 0 2px 20px rgba(0, 188, 212, 0.1);
+          transition: var(--transition);
         }
 
         .header.scrolled {
           padding: 10px 0;
-          background: rgba(30, 41, 59, 0.95);
+          background: linear-gradient(
+            to bottom,
+            rgba(30, 41, 59, 0.98),
+            rgba(30, 41, 59, 0.9)
+          );
         }
 
-        /* NAV CONTAINER */
         .nav-container {
           display: flex;
           justify-content: space-between;
           align-items: center;
           padding: 20px 0;
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
-        /* LOGO */
         .logo {
           font-size: 1.8rem;
           font-weight: 700;
-          color: var(--primary);
+          background: linear-gradient(135deg, #00bcd4, #ff5722);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
           text-decoration: none;
           position: relative;
           overflow: hidden;
-          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: var(--transition);
           cursor: pointer;
         }
 
@@ -100,8 +134,14 @@ const Header = () => {
           left: -100%;
           width: 100%;
           height: 2px;
-          background: var(--primary);
-          transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          background: linear-gradient(
+            90deg,
+            transparent,
+            #00bcd4,
+            #ff5722,
+            transparent
+          );
+          transition: var(--transition);
         }
 
         .logo:hover::after {
@@ -109,14 +149,14 @@ const Header = () => {
         }
 
         .logo:hover {
-          color: var(--primary);
+          transform: translateY(-2px);
         }
 
-        /* NAV LINKS */
         .nav-links {
           display: flex;
           list-style: none;
-          transition: all 0.5s ease;
+          margin: 0;
+          padding: 0;
         }
 
         .nav-links li {
@@ -128,9 +168,9 @@ const Header = () => {
           text-decoration: none;
           color: var(--light);
           font-weight: 500;
-          position: relative;
           padding: 5px 0;
-          transition: color 0.3s ease;
+          position: relative;
+          transition: var(--transition);
           cursor: pointer;
           font-size: 1rem;
         }
@@ -142,8 +182,8 @@ const Header = () => {
           left: 0;
           width: 0;
           height: 2px;
-          background: var(--primary);
-          transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: linear-gradient(to right, #00bcd4, #ff5722);
+          transition: var(--transition);
         }
 
         .nav-links a:hover::after,
@@ -153,28 +193,27 @@ const Header = () => {
 
         .nav-links a:hover,
         .nav-links a.active {
-          color: var(--primary);
+          color: #00bcd4;
         }
 
-        /* HAMBURGER */
         .hamburger {
           display: none;
           cursor: pointer;
           font-size: 1.5rem;
-          transition: transform 0.4s ease, color 0.4s ease;
-          color: var(--light);
+          background: linear-gradient(135deg, #00bcd4, #ff5722);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: var(--transition);
           padding: 8px;
           z-index: 1001;
         }
 
         .hamburger:hover {
-          color: var(--primary);
           transform: rotate(90deg);
         }
 
-        /* MOBILE RESPONSIVE STYLES */
         @media (max-width: 768px) {
-          /* Header adjustments */
           .header {
             padding: 0;
           }
@@ -183,41 +222,35 @@ const Header = () => {
             padding: 0;
           }
 
-          /* Container adjustments */
-          .container {
-            padding: 0 20px;
-            width: 100%;
-          }
-
-          /* Nav container */
           .nav-container {
-            padding: 15px 0;
+            padding: 15px 20px;
             min-height: 70px;
           }
 
-          /* Logo adjustments */
           .logo {
             font-size: 1.5rem;
             z-index: 1001;
           }
 
-          /* Mobile menu styles */
           .nav-links {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
             height: 100vh;
-            background: rgba(15, 23, 42, 0.98);
+            background: linear-gradient(
+              135deg,
+              rgba(30, 41, 59, 0.98),
+              rgba(15, 23, 42, 0.95)
+            );
             backdrop-filter: blur(15px);
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 80px 20px 40px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            box-shadow: -5px 0 15px rgba(0, 188, 212, 0.3);
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 999;
-            margin: 0;
           }
 
           .nav-links.active {
@@ -261,7 +294,7 @@ const Header = () => {
             font-weight: 600;
             color: var(--light);
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             width: 100%;
             max-width: 300px;
             margin: 0 auto;
@@ -269,8 +302,12 @@ const Header = () => {
 
           .nav-links a:hover,
           .nav-links a.active {
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 188, 212, 0.15),
+              rgba(255, 87, 34, 0.15)
+            );
+            color: #00bcd4;
             transform: translateX(-5px);
           }
 
@@ -278,36 +315,29 @@ const Header = () => {
             display: none;
           }
 
-          /* Hamburger adjustments */
           .hamburger {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 44px;
             height: 44px;
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 188, 212, 0.2),
+              rgba(255, 87, 34, 0.2)
+            );
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 188, 212, 0.2);
           }
 
           .hamburger i {
             font-size: 1.3rem;
           }
-
-          /* Prevent body scroll when menu is open */
-          body.menu-open {
-            overflow: hidden;
-          }
         }
 
-        /* Small phones */
         @media (max-width: 480px) {
-          .container {
-            padding: 0 15px;
-          }
-
           .nav-container {
-            padding: 12px 0;
+            padding: 12px 15px;
             min-height: 60px;
           }
 
@@ -335,42 +365,18 @@ const Header = () => {
           }
         }
 
-        /* Large phones and small tablets */
-        @media (min-width: 481px) and (max-width: 768px) {
-          .nav-links a {
-            font-size: 1.25rem;
-            padding: 16px 24px;
-            max-width: 320px;
-          }
-
-          .nav-links li {
-            margin-bottom: 30px;
-          }
-
-          .logo {
-            font-size: 1.6rem;
-          }
-        }
-
-        /* Tablet landscape */
         @media (min-width: 769px) and (max-width: 1024px) {
           .nav-links li {
             margin-left: 1.5rem;
           }
-
-          .nav-links a {
-            font-size: 0.95rem;
-          }
         }
 
-        /* Fix for iOS Safari */
         @supports (-webkit-touch-callout: none) {
           .nav-links {
             height: -webkit-fill-available;
           }
         }
 
-        /* Smooth transitions */
         * {
           -webkit-tap-highlight-color: transparent;
         }

@@ -8,14 +8,11 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { Analytics } from "@vercel/analytics/react";
 
-// Lazy load heavy components
 const Projects = lazy(() => import("./components/Projects"));
 
-// Preload critical resources
 const preloadResources = () => {
   if (typeof window === "undefined") return;
 
-  // Preload Font Awesome
   const link = document.createElement("link");
   link.rel = "preload";
   link.as = "style";
@@ -24,7 +21,6 @@ const preloadResources = () => {
   link.crossOrigin = "anonymous";
   document.head.appendChild(link);
 
-  // Preconnect to critical domains
   const preconnectDomains = [
     "https://fonts.googleapis.com",
     "https://fonts.gstatic.com",
@@ -43,19 +39,15 @@ const preloadResources = () => {
 function App() {
   const [loading, setLoading] = useState(true);
 
-  // Use useMemo for expensive calculations
   const loadingDuration = useMemo(() => {
-    // Detect slow devices and adjust loading time
     const isSlowDevice =
       navigator.hardwareConcurrency < 4 || navigator.deviceMemory < 4;
-    return isSlowDevice ? 500 : 300; // 300ms for fast, 500ms for slow devices
+    return isSlowDevice ? 500 : 300;
   }, []);
 
   useEffect(() => {
-    // Preload resources immediately
     preloadResources();
 
-    // Load Font Awesome after preload
     const loadFontAwesome = () => {
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -65,25 +57,21 @@ function App() {
       document.head.appendChild(link);
     };
 
-    // Use requestIdleCallback for non-critical tasks
     if ("requestIdleCallback" in window) {
       requestIdleCallback(loadFontAwesome);
     } else {
       setTimeout(loadFontAwesome, 0);
     }
 
-    // Minimal loading time
     const timer = setTimeout(() => {
       setLoading(false);
 
-      // Mark app as loaded for CSS transitions
       document.body.classList.add("app-loaded");
     }, loadingDuration);
 
     return () => clearTimeout(timer);
   }, [loadingDuration]);
 
-  // Simple loading component
   const LoadingFallback = useMemo(
     () => (
       <div className="loading-screen">
@@ -100,7 +88,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Animated Background */}
       <div className="animated-bg">
         <div className="bg-shape shape-1"></div>
         <div className="bg-shape shape-2"></div>
@@ -112,7 +99,6 @@ function App() {
       <Hero />
       <About />
 
-      {/* Lazy load Projects with Suspense */}
       <Suspense
         fallback={<div className="section-loading">Loading projects...</div>}
       >
@@ -127,5 +113,4 @@ function App() {
   );
 }
 
-// Wrap with React.memo for performance
 export default React.memo(App);
